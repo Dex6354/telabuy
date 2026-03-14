@@ -67,7 +67,6 @@
             color: #3e7085; 
         }
 
-        /* Opções de Pagamento */
         .payment-options {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -96,7 +95,6 @@
             background-color: #f0f7f9;
         }
 
-        /* Formulários */
         .payment-form {
             display: none;
             text-align: left;
@@ -135,6 +133,21 @@
 
         .expiry { color: #d32f2f; font-size: 11px; font-weight: bold; text-align: center; }
         
+        /* Secure Info Style */
+        .security-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #2e7d32;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #f1f8e9;
+            border-radius: 8px;
+        }
+
         .btn {
             background-color: #3e7085;
             color: white;
@@ -146,7 +159,6 @@
             cursor: pointer;
             width: 100%;
             transition: background 0.3s;
-            margin-top: 10px;
         }
 
         .btn:hover { background-color: #2c5161; }
@@ -201,19 +213,11 @@
     <div id="form-card" class="payment-form">
         <label>Cardholder Name</label>
         <input type="text" placeholder="NAME AS PRINTED ON CARD">
-        
         <label>Card Number</label>
         <input type="text" placeholder="0000 0000 0000 0000">
-        
         <div style="display: flex; gap: 10px;">
-            <div style="flex: 1.5;">
-                <label>Expiration</label>
-                <input type="text" placeholder="MM/YY">
-            </div>
-            <div style="flex: 1;">
-                <label>CVV</label>
-                <input type="text" placeholder="123">
-            </div>
+            <div style="flex: 1.5;"><label>Expiration</label><input type="text" placeholder="MM/YY"></div>
+            <div style="flex: 1;"><label>CVV</label><input type="text" placeholder="123"></div>
         </div>
     </div>
 
@@ -221,6 +225,11 @@
         <label>BTC Wallet Address:</label>
         <div class="data-box" id="btc-address"></div>
         <label style="text-align: center; margin-top: 5px; font-size: 10px;">Network: Bitcoin (BTC)</label>
+    </div>
+
+    <div class="security-info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        Secure & Encrypted Environment
     </div>
 
     <button class="btn" onclick="window.location.href='checkout.html'">
@@ -239,16 +248,12 @@
     }
 
     function selectMethod(method) {
-        // Reset visual das opções
         document.querySelectorAll('.option-card').forEach(c => c.classList.remove('active'));
-        // Esconder todos os formulários
         document.querySelectorAll('.payment-form').forEach(f => f.style.display = 'none');
 
-        // Ativar opção selecionada
         document.getElementById('opt-' + method).classList.add('active');
         document.getElementById('form-' + method).style.display = 'block';
 
-        // Atualizar dados dinâmicos
         if (method === 'pix') {
             document.getElementById('pix-key').textContent = '00020126580014br.gov.bcb.pix0136' + generateRandomString(25).toUpperCase() + '520400005303986';
         } else if (method === 'btc') {
@@ -256,7 +261,6 @@
         }
     }
 
-    // Inicializa com Pix gerado
     window.onload = () => selectMethod('pix');
 </script>
 
