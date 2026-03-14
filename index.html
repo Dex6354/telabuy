@@ -11,22 +11,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+            min-height: 100vh;
             margin: 0;
             color: #333;
-            box-sizing: border-box; /* Garante que padding/border não aumentem o tamanho */
-            padding: 20px; /* Adiciona um pequeno espaçamento nas bordas da tela */
+            box-sizing: border-box;
+            padding: 20px;
         }
         
         *, *:before, *:after {
-            box-sizing: inherit; /* Aplica border-box globalmente */
+            box-sizing: inherit;
         }
 
         .container {
             background: white;
-            width: 100%; /* Ocupa toda a largura disponível */
-            max-width: 400px; /* Limita a largura máxima para telas maiores */
-            padding: 20px; /* Reduz o padding para telas menores */
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -35,7 +35,7 @@
         .details {
             border: 1px solid #eee;
             border-radius: 15px;
-            padding: 15px; /* Reduz o padding para telas menores */
+            padding: 15px;
             text-align: left;
             margin-bottom: 20px;
         }
@@ -43,8 +43,9 @@
         .row {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* Alinha os itens verticalmente */
+            align-items: flex-start; /* Alinha ao topo caso o texto quebre */
             margin-bottom: 10px;
+            gap: 10px; /* Garante espaço entre label e value */
         }
         
         .row:last-child { margin-bottom: 0; }
@@ -52,19 +53,19 @@
         .label { 
             color: #666; 
             font-size: 14px; 
-            flex-grow: 1; /* Permite que o rótulo cresça */
-            margin-right: 10px; /* Pequeno espaçamento do valor */
+            flex-shrink: 0; /* Impede que o rótulo seja esmagado */
         }
         
         .value { 
             font-weight: bold; 
             font-size: 14px; 
-            white-space: nowrap; /* Impede que o valor quebre de linha */
+            text-align: right;
+            word-break: break-word; /* Quebra palavras longas se necessário */
+            overflow-wrap: break-word;
         }
         
         .divider {
             border-top: 1px dashed #b0bec5;
-            /* Ajuste o margin-left/right negativo para compensar o padding do container */
             margin: 20px -20px; 
             position: relative;
         }
@@ -74,11 +75,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
-            padding: 10px 0 20px 0; /* Reduz padding para telas menores */
-        }
-
-        .summary span {
-            white-space: nowrap; /* Impede quebras de linha no total */
+            padding: 10px 0 20px 0;
         }
 
         .loader {
@@ -99,7 +96,7 @@
         .status-text {
             color: #78909c;
             font-size: 14px;
-            margin-bottom: 20px; /* Reduz margin para telas menores */
+            margin-bottom: 20px;
             line-height: 1.4;
         }
         
@@ -111,20 +108,16 @@
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%; /* Ocupa toda a largura no mobile */
-            max-width: 200px; /* Limita a largura máxima */
-            margin: 0 auto; /* Centraliza o botão */
-            display: block; /* Garante que o botão ocupe toda a linha */
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            display: block;
         }
 
-        /* Ajustes adicionais para telas extremamente pequenas */
         @media (max-width: 320px) {
-            .container {
-                padding: 15px;
-            }
-            .divider {
-                margin: 15px -15px;
-            }
+            .container { padding: 15px; }
+            .divider { margin: 15px -15px; }
+            .label, .value { font-size: 13px; }
         }
     </style>
 </head>
