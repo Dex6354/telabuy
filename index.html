@@ -2,6 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processamento de Pagamento</title>
     <style>
         body {
             background-color: #e3f2fd;
@@ -9,45 +11,76 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
             margin: 0;
             color: #333;
+            box-sizing: border-box; /* Garante que padding/border não aumentem o tamanho */
+            padding: 20px; /* Adiciona um pequeno espaçamento nas bordas da tela */
         }
+        
+        *, *:before, *:after {
+            box-sizing: inherit; /* Aplica border-box globalmente */
+        }
+
         .container {
             background: white;
-            width: 350px;
-            padding: 30px;
+            width: 100%; /* Ocupa toda a largura disponível */
+            max-width: 400px; /* Limita a largura máxima para telas maiores */
+            padding: 20px; /* Reduz o padding para telas menores */
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
+
         .details {
             border: 1px solid #eee;
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px; /* Reduz o padding para telas menores */
             text-align: left;
             margin-bottom: 20px;
         }
+
         .row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            align-items: center; /* Alinha os itens verticalmente */
+            margin-bottom: 10px;
         }
+        
         .row:last-child { margin-bottom: 0; }
-        .label { color: #666; font-size: 14px; }
-        .value { font-weight: bold; font-size: 14px; }
+        
+        .label { 
+            color: #666; 
+            font-size: 14px; 
+            flex-grow: 1; /* Permite que o rótulo cresça */
+            margin-right: 10px; /* Pequeno espaçamento do valor */
+        }
+        
+        .value { 
+            font-weight: bold; 
+            font-size: 14px; 
+            white-space: nowrap; /* Impede que o valor quebre de linha */
+        }
         
         .divider {
             border-top: 1px dashed #b0bec5;
-            margin: 20px -30px;
+            /* Ajuste o margin-left/right negativo para compensar o padding do container */
+            margin: 20px -20px; 
             position: relative;
         }
+        
         .summary {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-weight: bold;
-            padding: 10px 0 30px 0;
+            padding: 10px 0 20px 0; /* Reduz padding para telas menores */
         }
+
+        .summary span {
+            white-space: nowrap; /* Impede quebras de linha no total */
+        }
+
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #4682b4;
@@ -57,16 +90,19 @@
             animation: spin 2s linear infinite;
             margin: 0 auto 20px;
         }
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
         .status-text {
             color: #78909c;
             font-size: 14px;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduz margin para telas menores */
             line-height: 1.4;
         }
+        
         .btn {
             background-color: #3e7085;
             color: white;
@@ -75,6 +111,20 @@
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
+            width: 100%; /* Ocupa toda a largura no mobile */
+            max-width: 200px; /* Limita a largura máxima */
+            margin: 0 auto; /* Centraliza o botão */
+            display: block; /* Garante que o botão ocupe toda a linha */
+        }
+
+        /* Ajustes adicionais para telas extremamente pequenas */
+        @media (max-width: 320px) {
+            .container {
+                padding: 15px;
+            }
+            .divider {
+                margin: 15px -15px;
+            }
         }
     </style>
 </head>
@@ -84,12 +134,12 @@
     <div class="details">
         <div class="row">
             <span class="label">Package Price</span>
-            <span class="value">6.99 USD</span>
+            <span class="value">15.00 BRL</span>
         </div>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
         <div class="row">
             <span class="label">Description</span>
-            <span class="value">For unlimited use</span>
+            <span class="value">For unic use</span>
         </div>
     </div>
 
@@ -97,7 +147,7 @@
 
     <div class="summary">
         <span>Total Summary</span>
-        <span>6.99 USD</span>
+        <span>15.00 BRL</span>
     </div>
 
     <div class="loader"></div>
