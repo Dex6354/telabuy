@@ -147,7 +147,6 @@
             border-radius: 8px;
         }
 
-        /* Botão com Animação */
         .btn {
             background-color: #3e7085;
             color: white;
@@ -166,6 +165,41 @@
 
         .btn:active {
             transform: scale(0.95);
+        }
+
+        /* Estilo do Modal extraído do index.html */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.2s;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .modal-content p { font-weight: bold; color: #3e7085; margin-bottom: 20px; }
+
+        .btn-modal {
+            background-color: #3e7085;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
         }
 
         @media (max-width: 320px) {
@@ -242,6 +276,13 @@
     </button>
 </div>
 
+<div class="modal-overlay" id="modalPayment">
+    <div class="modal-content">
+        <p>Por favor, finalize o pagamento para liberar seu acesso.</p>
+        <button class="btn-modal" onclick="closeAndRedirect()">OK</button>
+    </div>
+</div>
+
 <script>
     function generateRandomString(length) {
         const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -267,10 +308,11 @@
     }
 
     function handleConfirm() {
-        // Pop-up informativo
-        alert("Por favor, finalize o pagamento para liberar seu acesso.");
-        
-        // Redirecionamento após o OK do usuário
+        // Exibe o modal em vez do alert
+        document.getElementById('modalPayment').style.display = 'flex';
+    }
+
+    function closeAndRedirect() {
         window.location.href = 'checkout.html';
     }
 
