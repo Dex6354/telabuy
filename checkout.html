@@ -78,13 +78,14 @@
             padding: 10px 0 20px 0;
         }
 
+        /* Estilo do Carregamento */
         .loader {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #4682b4;
+            border-top: 4px solid #3e7085;
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            animation: spin 2s linear infinite;
+            animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
         
@@ -92,7 +93,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         .status-text {
             color: #78909c;
             font-size: 14px;
@@ -101,18 +102,22 @@
         }
         
         .btn {
-            background-color: #3e7085;
+            background-color: #78909c; /* Cor mais neutra para estado de verificação */
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 15px 25px;
             border-radius: 8px;
             font-weight: bold;
-            cursor: pointer;
+            font-size: 16px;
+            cursor: not-allowed;
             width: 100%;
             margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Barra de Segurança e Logos */
         .security-info {
             display: flex;
             align-items: center;
@@ -131,16 +136,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
-            opacity: 0.7;
-            padding-top: 10px;
+            opacity: 0.8;
+            padding-top: 15px;
             border-top: 1px solid #eee;
         }
 
         .payment-methods img {
-            height: 20px;
-            filter: grayscale(20%);
+            height: 22px;
+            object-fit: contain;
         }
 
         @media (max-width: 320px) {
@@ -156,6 +161,10 @@
         <div class="row">
             <span class="label">Package Price</span>
             <span class="value">15.00 BRL</span>
+        </div>
+        <div class="row">
+            <span class="label">Date Access</span>
+            <span class="value" id="current-date">--/--/----</span>
         </div>
         <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
         <div class="row">
@@ -183,18 +192,32 @@
 
     <div class="security-info">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        Ambiente Seguro & Criptografado
+        Secure & Encrypted Environment
     </div>
 
-    <button class="btn">Verifying...</button>
+    <button class="btn" disabled>
+        Verifying payment...
+    </button>
 
     <div class="payment-methods">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Pix_logo.svg" alt="Pix">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Pix_%28Brazil%29_logo.svg/3840px-Pix_%28Brazil%29_logo.svg.png" alt="Pix">
+        <img src="https://logos-world.net/wp-content/uploads/2020/09/Mastercard-Logo.png" alt="Mastercard">
+        <img src="https://logosmarcas.net/wp-content/uploads/2020/04/Visa-Logo-2014%E2%80%93presente.jpg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" alt="Bitcoin">
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
     </div>
 </div>
+
+<script>
+    // Mantém a data atualizada
+    const dateElement = document.getElementById('current-date');
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('pt-BR');
+    dateElement.textContent = formattedDate;
+
+    // Opcional: Redirecionar após alguns segundos de "verificação"
+    // setTimeout(() => { window.location.href = 'success.html'; }, 5000);
+</script>
 
 </body>
 </html>
